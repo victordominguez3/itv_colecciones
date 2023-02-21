@@ -4,8 +4,9 @@ import models.Coche
 import models.Moto
 import models.Vehiculo
 import `typealias`.ListaVehiculos
+import `typealias`.MapaMarcaVehiculos
 
-class itvRepositoryFunctions {
+class itvRepositoryFunctions: itvRepository<Vehiculo> {
 
     var misVehiculos: Sequence<Vehiculo> = sequenceOf(
         Coche("Peugeot", 2007, true, 120000, 4),
@@ -76,8 +77,21 @@ class itvRepositoryFunctions {
             .div(numMotos())
     }
 
-    override fun vehiculosPorMarca(): ListaVehiculos {
+    override fun vehiculosPorMarca(): MapaMarcaVehiculos {
+        return misVehiculos.groupBy { it.marca }
+    }
 
+    override fun vehiculosOrdenadosAnyo(): ListaVehiculos {
+        return misVehiculos.sortedBy { it.anyoFabricacion }.toList()
+    }
+
+    override fun ordenarMarcasDescendente(): List<String> {
+        return vehiculosPorMarca().keys
+            .sortedDescending()
+    }
+
+    override fun vehiculosPorMarcaOrdenadoKmDescendente(): MapaMarcaVehiculos {
+        return vehiculosPorMarca().mapValues { it.value.sortedByDescending { it.anyoFabricacion } }
     }
 
 }
