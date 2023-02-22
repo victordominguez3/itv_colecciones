@@ -9,6 +9,15 @@ sealed class Vehiculo(
     val kilometraje: Int
 ) {
     val id: UUID = UUID.randomUUID()
+
+    override fun hashCode(): Int {
+        var result = id.hashCode()
+        result = 31 * result + marca.hashCode()
+        result = 31 * result + anyoFabricacion.hashCode()
+        result = 31 * result + isApto.hashCode()
+        result = 31 * result + kilometraje.hashCode()
+        return result
+    }
 }
 
 class Coche(
@@ -26,12 +35,15 @@ class Coche(
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other !is Coche) return false
-        return this.id == other.id
-                && this.marca == other.marca
+        return this.marca == other.marca
                 && this.anyoFabricacion == other.anyoFabricacion
                 && this.isApto == other.isApto
                 && this.kilometraje == other.kilometraje
                 && this.numPuertas == other.numPuertas
+    }
+
+    override fun hashCode(): Int {
+        return super.hashCode()
     }
 }
 
@@ -50,11 +62,14 @@ class Moto(
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other !is Moto) return false
-        return this.id == other.id
-                && this.marca == other.marca
+        return this.marca == other.marca
                 && this.anyoFabricacion == other.anyoFabricacion
                 && this.isApto == other.isApto
                 && this.kilometraje == other.kilometraje
                 && this.cilindradas == other.cilindradas
+    }
+
+    override fun hashCode(): Int {
+        return super.hashCode()
     }
 }

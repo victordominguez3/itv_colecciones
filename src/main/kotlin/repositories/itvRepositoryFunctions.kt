@@ -38,15 +38,20 @@ class itvRepositoryFunctions: itvRepository<Vehiculo> {
         return misVehiculos.minBy { it.kilometraje }
     }
 
-    override fun mediaKilometrajeMotos(): Int {
+    override fun mediaKilometrajeMotos(): Double {
         return misVehiculos.filter { it is Moto }
-            .sumOf { it.kilometraje }
-            .div(numMotos())
+            .map { it.kilometraje }
+            .average()
     }
 
     override fun vehiculoMasAntiguoConMasDeDosPuertas(): Vehiculo {
         return misVehiculos.filter { it is Coche && it.numPuertas > 2 }
             .minBy { it.anyoFabricacion }
+    }
+
+    override fun numVehiculosTipo(): Map<String?, Int> {
+        return misVehiculos.groupBy { it::class.simpleName }
+            .mapValues { it.value.count() }
     }
 
     override fun numMotos(): Int {
@@ -57,6 +62,11 @@ class itvRepositoryFunctions: itvRepository<Vehiculo> {
         return  misVehiculos.filter { it is Coche }.count()
     }
 
+    override fun numVehiculosAptos(): Map<String?, Int> {
+        return misVehiculos.groupBy { it::class.simpleName }
+            .mapValues { it.value.count { it.isApto } }
+    }
+
     override fun numCochesAptos(): Int {
         return misVehiculos.filter { it is Coche && it.isApto }.count()
     }
@@ -65,15 +75,21 @@ class itvRepositoryFunctions: itvRepository<Vehiculo> {
         return misVehiculos.filter { it is Moto && it.isApto }.count()
     }
 
-    override fun mediaAnyosFabricacionCoches(): Int {
+    override fun mediaAnyosFabricacionVehiculos(): Map<String?, Double> {
+        return misVehiculos.groupBy { it::class.simpleName }
+            .mapValues { it.value.map { it.anyoFabricacion } }
+            .mapValues { it.value.average() }
+    }
+
+    override fun mediaAnyosFabricacionCoches(): Double {
         return misVehiculos.filter { it is Coche }
-            .sumOf { it.anyoFabricacion }
+            .sumOf { it.anyoFabricacion }.toDouble()
             .div(numCoches())
     }
 
-    override fun mediaAnyosFabricacionMotos(): Int {
+    override fun mediaAnyosFabricacionMotos(): Double {
         return misVehiculos.filter { it is Moto }
-            .sumOf { it.anyoFabricacion }
+            .sumOf { it.anyoFabricacion }.toDouble()
             .div(numMotos())
     }
 

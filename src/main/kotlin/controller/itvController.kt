@@ -5,7 +5,7 @@ import repositories.itvRepository
 import `typealias`.ListaVehiculos
 import `typealias`.MapaMarcaVehiculos
 
-class itvController(var repository: itvRepository<Vehiculo>) {
+class itvController(private val repository: itvRepository<Vehiculo>) {
 
     fun mostrarTodos(): ListaVehiculos {
         return repository.mostrarTodos()
@@ -27,12 +27,16 @@ class itvController(var repository: itvRepository<Vehiculo>) {
         return repository.vehiculoMenosKilometraje()
     }
 
-    fun mediaKilometrajeMotos(): Int {
+    fun mediaKilometrajeMotos(): Double {
         return repository.mediaKilometrajeMotos()
     }
 
     fun vehiculoMasAntiguoConMasDeDosPuertas(): Vehiculo {
         return repository.vehiculoMasAntiguoConMasDeDosPuertas()
+    }
+
+    fun numVehiculosTipo(): Map<String?, Int> {
+        return repository.numVehiculosTipo()
     }
 
     fun numMotos(): Int {
@@ -43,6 +47,10 @@ class itvController(var repository: itvRepository<Vehiculo>) {
         return repository.numCoches()
     }
 
+    fun numVehiculosAptos(): Map<String?, Int> {
+        return repository.numVehiculosAptos()
+    }
+
     fun numCochesAptos(): Int {
         return repository.numCochesAptos()
     }
@@ -51,11 +59,15 @@ class itvController(var repository: itvRepository<Vehiculo>) {
         return repository.numMotosAptas()
     }
 
-    fun mediaAnyosFabricacionCoches(): Int {
+    fun mediaAnyosFabricacionVehiculos(): Map<String?, Double> {
+        return repository.mediaAnyosFabricacionVehiculos()
+    }
+
+    fun mediaAnyosFabricacionCoches(): Double {
         return repository.mediaAnyosFabricacionCoches()
     }
 
-    fun mediaAnyosFabricacionMotos(): Int {
+    fun mediaAnyosFabricacionMotos(): Double {
         return repository.mediaAnyosFabricacionMotos()
     }
 
