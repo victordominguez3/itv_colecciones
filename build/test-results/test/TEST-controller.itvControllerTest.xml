@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="controller.itvControllerTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-02-22T18:30:27" hostname="DESKTOP-2RIMJPQ" time="0.231">
+  <properties/>
+  <testcase name="mostrarMotosTest()" classname="controller.itvControllerTest" time="0.231"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
