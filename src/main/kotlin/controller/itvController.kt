@@ -1,5 +1,6 @@
 package controller
 
+import exceptions.NoExistenVehiculosException
 import models.Vehiculo
 import repositories.itvRepository
 import `typealias`.ListaVehiculos
@@ -19,12 +20,14 @@ class itvController(private val repository: itvRepository<Vehiculo>) {
         return repository.mostrarMotos()
     }
 
-    fun vehiculoMasModerno(): Vehiculo {
+    fun vehiculoMasModerno(): Vehiculo? {
         return repository.vehiculoMasModerno()
+            ?: throw NoExistenVehiculosException()
     }
 
-    fun vehiculoMenosKilometraje(): Vehiculo {
+    fun vehiculoMenosKilometraje(): Vehiculo? {
         return repository.vehiculoMenosKilometraje()
+            ?: throw NoExistenVehiculosException()
     }
 
     fun mediaKilometrajeMotos(): Double {

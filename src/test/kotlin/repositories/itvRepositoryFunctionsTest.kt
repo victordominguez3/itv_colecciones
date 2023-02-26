@@ -224,7 +224,7 @@ class itvRepositoryFunctionsTest {
     @Test
     fun ordenarMarcasDescendenteTest() {
         val lista = repository.ordenarMarcasDescendente()
-        val miLista = listOf<String>("Seat", "Peugeot", "BMW")
+        val miLista = listOf("Seat", "Peugeot", "BMW")
 
         assertEquals(miLista, lista)
     }

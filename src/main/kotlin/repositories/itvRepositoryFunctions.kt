@@ -1,5 +1,7 @@
 package repositories
 
+import exceptions.NoExistenVehiculosException
+import exceptions.VehiculoException
 import models.Coche
 import models.Moto
 import models.Vehiculo
@@ -30,11 +32,11 @@ class itvRepositoryFunctions: itvRepository<Vehiculo> {
         return misVehiculos.filter { it is Moto }.toList()
     }
 
-    override fun vehiculoMasModerno(): Vehiculo {
+    override fun vehiculoMasModerno(): Vehiculo? {
         return misVehiculos.maxBy { it.anyoFabricacion }
     }
 
-    override fun vehiculoMenosKilometraje(): Vehiculo {
+    override fun vehiculoMenosKilometraje(): Vehiculo? {
         return misVehiculos.minBy { it.kilometraje }
     }
 

@@ -6,8 +6,8 @@ interface itvRepository<T> {
     fun mostrarTodos(): List<T>
     fun mostrarCoches(): List<T>
     fun mostrarMotos(): List<T>
-    fun vehiculoMasModerno(): T
-    fun vehiculoMenosKilometraje(): T
+    fun vehiculoMasModerno(): T?
+    fun vehiculoMenosKilometraje(): T?
     fun mediaKilometrajeMotos(): Double
     fun vehiculoMasAntiguoConMasDeDosPuertas(): T
     fun numVehiculosTipo():Map<String?, Int>
